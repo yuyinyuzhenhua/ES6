@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function each(arr, callback){
+         for(let i = 0; i < arr.length; i++){
+             var item = arr[i]
+             var index = i
+             console.log(item, index)
+             let flag = callback(arr, item, index)
+             if(flag === false){
+                 break;
+             }
+         }
+    }
+    each([11,22,33,44], function(arr, item, index){
+        if(index > 1){
+            return false;
+        }
+    })
+</script>
+</html>
