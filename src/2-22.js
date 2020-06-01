@@ -18,12 +18,37 @@ function ajax(url, callback){
     }
 }
 
-ajax('static/a.json', (res) => {
-    console.log(res)
-    ajax('static/b.json', res => {
+new Promise((resolve, reject) => {
+    ajax('static/a.json', res => {
         console.log(res)
-        ajax('static/c.json', res => {
+        resolve()
+    })
+}).then(result => {
+    console.log('a success')
+    return  new Promise((resolve, reject) => {
+        ajax('static/b.json', res => {
             console.log(res)
+            resolve()
         })
     })
+}).then(result => {
+    console.log('b success')
+    return new Promise((resolve, reject) => {
+        ajax('static/c.json', res => {
+            console.log(res)
+            resolve( )
+        })
+    })
+}).then(result => {
+    console.log('c success')
 })
+
+// ajax('static/a.json', (res) => {
+//     console.log(res)
+//     ajax('static/b.json', res => {
+//         console.log(res)
+//         ajax('static/c.json', res => {
+//             console.log(res)
+//         })
+//     })
+// })

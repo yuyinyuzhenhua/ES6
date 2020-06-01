@@ -1,5 +1,5 @@
 var url = 'http://musicapi.xiecheng.live/personalized'
-function ajax(url, callback){
+function ajax(url){
     var promise = new Promise((resolve, reject) => {
         var xmlhttp;
         if(window.XMLHttpRequest){
@@ -15,7 +15,11 @@ function ajax(url, callback){
                 var obj = JSON.parse(xmlhttp.responseText)
                 // console.log(obj)
                 // callback(obj)
+                // successCallback && successCallback(obj)
                 resolve(obj)
+            } else if (xmlhttp.readyState == 4 && xmlhttp.status == 404){
+                // failCallback && failCallback(xmlhttp.statusText)
+                reject(xmlhttp.statusText)
             }
         }
     })
@@ -23,6 +27,28 @@ function ajax(url, callback){
 
 }
 
+// ajax('static/a.json').then(res => {
+//     console.log(res)
+//     console.log('a success')
+//     return ajax('static/b.json')
+// }).then(res => {
+//     console.log(res)
+//     console.log('b success')
+//     return  ajax('static/c.json')
+// }).then(res => {
+//     console.log(res)
+//     console.log('c success')
+// })
+
+
 ajax('static/a.json').then(res => {
     console.log(res)
+    return ajax('static/bl.json')
+}).then(res => {
+    console.log(res)
+    return ajax('static/c.json')
+} ).then(res => {
+    console.log(res)
+}).catch(err => {
+    console.log('err:' + err)
 })
