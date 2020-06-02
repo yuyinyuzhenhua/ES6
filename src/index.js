@@ -2,4 +2,4 @@
 // console.log(sum(4, 5))
 import "regenerator-runtime/runtime.js";
 
-import './4-6'
+import './5-2'
